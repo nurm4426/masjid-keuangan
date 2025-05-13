@@ -1,0 +1,12 @@
+/* src/index.css */
+
+/* Import base styles from Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Anda bisa menambahkan custom styles di bawah ini */
+/* Contoh: */
+/* body {
+  font-family: 'Roboto', sans-serif;
+} */
