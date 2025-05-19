@@ -4,6 +4,7 @@ import { db } from '../firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import * as XLSX from 'xlsx';
 import { exportToPDF } from '../utils/exportToPDF';
+import { exportToExcel } from '../utils/exportToExcel';
 
 const Laporan = () => {
   const [transactions, setTransactions] = useState([]);
@@ -13,7 +14,7 @@ const Laporan = () => {
   const [selectedYear, setSelectedYear] = useState('');
 
   // 👇 Tambahkan ini sesuai nilai saldo akhir bulan sebelumnya
-  const previousMonthBalance = 5000000;
+  const previousMonthBalance = 52991000;
 
   useEffect(() => {
     const fetchTransactions = async () => {
@@ -125,7 +126,9 @@ const Laporan = () => {
         </div>
         <div className="flex gap-3">
           <button
-            onClick={exportToExcel}
+            onClick={() =>
+                exportToExcel(filteredTransactions, selectedMonth, selectedYear, previousMonthBalance)
+            }
             className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded"
           >
             Ekspor Excel

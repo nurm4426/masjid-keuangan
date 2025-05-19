@@ -4,6 +4,7 @@ import { db } from '../firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import * as XLSX from 'xlsx';
 import { exportToPDF } from '../utils/exportToPDF';
+import { exportToExcel } from '../utils/exportToExcel';
 
 const Laporanmobile = () => {
   const [transactions, setTransactions] = useState([]);
@@ -12,7 +13,7 @@ const Laporanmobile = () => {
   const [selectedMonth, setSelectedMonth] = useState('');
   const [selectedYear, setSelectedYear] = useState('');
 
-  const previousMonthBalance = 5000000;
+  const previousMonthBalance = 52991000;
 
   useEffect(() => {
     const fetchTransactions = async () => {
@@ -126,7 +127,9 @@ const Laporanmobile = () => {
 
         <div className="flex flex-col gap-2">
           <button
-            onClick={exportToExcel}
+            onClick={() =>
+                exportToExcel(filteredTransactions, selectedMonth, selectedYear, previousMonthBalance)
+            }
             className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded"
           >
             Ekspor Excel
